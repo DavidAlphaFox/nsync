@@ -95,6 +95,7 @@ handle_info({tcp, Socket, Data}, #state{callback=Callback,
                                         state=loading,
                                         rdb_state=RdbState}=State) ->
     NewState =
+        %% 分析收到的packet
         case rdb_load:packet(RdbState, Data, Callback) of
             {eof, Rest} ->
                 case CallerPid of
